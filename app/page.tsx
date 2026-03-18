@@ -18,9 +18,10 @@ export default function Home() {
     try {
       const res = await fetch(`/api/forecast?species=${species}`);
       const data = await res.json();
+      console.log("Client: Received forecast data:", data);
       setForecast(data);
     } catch (error) {
-      console.error("Failed to fetch forecast:", error);
+      console.error("Client: Failed to fetch forecast:", error);
     }
     setLoading(false);
   }, [species]);
