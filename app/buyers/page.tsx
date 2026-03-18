@@ -75,7 +75,7 @@ export default function BuyersPage() {
         </div>
       </header>
 
-      <main className="px-6 mt-16 space-y-4">
+      <main className="px-6 mt-16 space-y-4 max-w-7xl mx-auto">
         {loading ? (
           <div className="py-20 text-center">
             <RefreshCw size={40} className="mx-auto text-ocean-blue/20 animate-spin mb-4" />
@@ -91,7 +91,7 @@ export default function BuyersPage() {
               </div>
             </div>
             
-            <div className="grid grid-cols-1 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {buyers.map((buyer) => (
                 <BuyerCard key={buyer.id} {...buyer} />
               ))}

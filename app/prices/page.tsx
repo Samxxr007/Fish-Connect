@@ -65,7 +65,7 @@ export default function PricesPage() {
       </header>
 
       {/* Price Grid */}
-      <main className="px-6 mt-16 space-y-4">
+      <main className="px-6 mt-16 space-y-4 max-w-7xl mx-auto">
         {loading ? (
           <div className="py-20 text-center">
             <RefreshCw size={40} className="mx-auto text-ocean-blue/20 animate-spin mb-4" />
@@ -78,7 +78,7 @@ export default function PricesPage() {
               <span className="text-[10px] font-bold text-ocean-blue bg-ocean-blue/5 px-2 py-1 rounded-md">Real-time Data</span>
             </div>
             
-            <div className="grid grid-cols-1 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
               {prices.map((item) => (
                 <FishPriceCard key={item.id} {...item} />
               ))}

@@ -21,7 +21,7 @@
    ```bash
    npm run dev
    ```
-4. Open [http://localhost:3000](http://localhost:3000) in your browser. For the best experience, use **Mobile View (Inspector mode > iPhone 12 Pro / 390px width)**.
+4. Open [https://fish-connect.vercel.app/](https://fish-connect.vercel.app/)) in your browser. For the best experience, use **Mobile View (Inspector mode > iPhone 12 Pro / 390px width)**.
 
 ## ✨ Key Features
 

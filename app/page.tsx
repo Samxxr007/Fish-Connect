@@ -53,103 +53,108 @@ export default function Home() {
         </div>
       </header>
 
-      <main className="px-6 -mt-12 space-y-8 relative z-20">
-        {/* Sea Conditions Widget */}
-        <section>
-          <SeaConditions />
-        </section>
+      <main className="px-6 -mt-12 space-y-8 relative z-20 max-w-7xl mx-auto">
+        {/* Top Grid: Sea Conditions & Demand Predictor */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+          <section>
+            <SeaConditions />
+          </section>
 
-        {/* Demand Spike Predictor Card */}
-        <section className="space-y-4">
-          <div className="flex justify-between items-end px-1">
+          {/* Demand Spike Predictor Card */}
+          <section className="space-y-4">
+            <div className="flex justify-between items-end px-1">
+              <div>
+                <h2 className="text-xl font-black text-gray-800 flex items-center gap-2">
+                  <Zap size={20} className="text-sunrise-orange fill-sunrise-orange" />
+                  Demand Predictor
+                </h2>
+                <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest leading-none">தேவை முன்கணிப்பு</p>
+              </div>
+              <select 
+                value={species}
+                onChange={(e) => setSpecies(e.target.value)}
+                className="bg-white border-0 text-xs font-black text-ocean-blue rounded-xl px-4 py-2 shadow-lg focus:ring-2 focus:ring-ocean-blue cursor-pointer"
+              >
+                <option value="Prawns">🦐 Prawns</option>
+                <option value="Tuna">🐟 Tuna</option>
+              </select>
+            </div>
+
+            <div className="bg-white rounded-3xl p-4 shadow-xl border border-gray-100">
+              {loading ? (
+                <div className="h-[250px] flex items-center justify-center">
+                  <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-ocean-blue"></div>
+                </div>
+              ) : (
+                <>
+                  <div className="flex items-center justify-between mb-4 px-2">
+                    <div>
+                      <p className="text-[10px] font-bold text-gray-400 uppercase">Current Reliability</p>
+                      <p className="text-sm font-black text-green-600">94% Accurate</p>
+                    </div>
+                    <div className="text-right">
+                      <p className="text-[10px] font-bold text-gray-400 uppercase">Season</p>
+                      <p className="text-sm font-black text-gray-800">Export High</p>
+                    </div>
+                  </div>
+                  <DemandChart data={forecast?.forecast || []} />
+                </>
+              )}
+            </div>
+
+            {!loading && species === "Prawns" && (
+              <SpikeAlert species="Prawns" spikePercentage={45} />
+            )}
+          </section>
+        </div>
+
+        {/* Bottom Grid: Recs & Actions */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+          {/* Top Recommendations */}
+          <section className="space-y-4">
             <div>
               <h2 className="text-xl font-black text-gray-800 flex items-center gap-2">
-                <Zap size={20} className="text-sunrise-orange fill-sunrise-orange" />
-                Demand Predictor
+                <TrendingUp size={20} className="text-ocean-blue" />
+                Smart Catch Tips
               </h2>
-              <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest leading-none">தேவை முன்கணிப்பு</p>
+              <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest leading-none">சிறந்த பரிந்துரைகள்</p>
             </div>
-            <select 
-              value={species}
-              onChange={(e) => setSpecies(e.target.value)}
-              className="bg-white border-0 text-xs font-black text-ocean-blue rounded-xl px-4 py-2 shadow-lg focus:ring-2 focus:ring-ocean-blue"
-            >
-              <option value="Prawns">🦐 Prawns</option>
-              <option value="Tuna">🐟 Tuna</option>
-            </select>
-          </div>
-
-          <div className="bg-white rounded-3xl p-4 shadow-xl border border-gray-100">
-            {loading ? (
-              <div className="h-[250px] flex items-center justify-center">
-                <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-ocean-blue"></div>
-              </div>
-            ) : (
-              <>
-                <div className="flex items-center justify-between mb-4 px-2">
-                   <div>
-                     <p className="text-[10px] font-bold text-gray-400 uppercase">Current Reliability</p>
-                     <p className="text-sm font-black text-green-600">94% Accurate</p>
-                   </div>
-                   <div className="text-right">
-                     <p className="text-[10px] font-bold text-gray-400 uppercase">Season</p>
-                     <p className="text-sm font-black text-gray-800">Export High</p>
-                   </div>
-                </div>
-                <DemandChart data={forecast?.forecast || []} />
-              </>
-            )}
-          </div>
-
-          {!loading && species === "Prawns" && (
-            <SpikeAlert species="Prawns" spikePercentage={45} />
-          )}
-        </section>
-
-        {/* Top Recommendations */}
-        <section className="space-y-4">
-          <div>
-            <h2 className="text-xl font-black text-gray-800 flex items-center gap-2">
-              <TrendingUp size={20} className="text-ocean-blue" />
-              Smart Catch Tips
-            </h2>
-            <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest leading-none">சிறந்த பரிந்துரைகள்</p>
-          </div>
-          
-          <div className="flex gap-4 overflow-x-auto pb-4 no-scrollbar -mx-6 px-6">
-            {topRecommendations.map((item, idx) => (
-              <div key={idx} className="min-w-[180px] bg-white rounded-2xl p-4 shadow-lg border border-gray-50 flex flex-col gap-3">
-                <span className="text-3xl">{item.icon}</span>
-                <div>
-                  <h3 className="font-bold text-gray-800">{item.name}</h3>
-                  <p className="text-[10px] text-gray-400 font-bold">{item.port}</p>
-                </div>
-                <div className="flex items-center justify-between mt-1">
-                  <span className="text-green-600 font-black text-sm">{item.demand}</span>
-                  <div className="bg-green-100 text-green-600 p-1.5 rounded-lg">
-                    <TrendingUp size={14} />
+            
+            <div className="flex gap-4 overflow-x-auto pb-4 no-scrollbar -mx-6 px-6 lg:mx-0 lg:px-0">
+              {topRecommendations.map((item, idx) => (
+                <div key={idx} className="min-w-[180px] bg-white rounded-2xl p-4 shadow-lg border border-gray-50 flex flex-col gap-3">
+                  <span className="text-3xl">{item.icon}</span>
+                  <div>
+                    <h3 className="font-bold text-gray-800">{item.name}</h3>
+                    <p className="text-[10px] text-gray-400 font-bold">{item.port}</p>
+                  </div>
+                  <div className="flex items-center justify-between mt-1">
+                    <span className="text-green-600 font-black text-sm">{item.demand}</span>
+                    <div className="bg-green-100 text-green-600 p-1.5 rounded-lg">
+                      <TrendingUp size={14} />
+                    </div>
                   </div>
                 </div>
-              </div>
-            ))}
-          </div>
-        </section>
+              ))}
+            </div>
+          </section>
 
-        {/* Quick Actions */}
-        <section className="grid grid-cols-2 gap-4">
-          <Link href="/prices" className="bg-white p-5 rounded-3xl shadow-lg border border-gray-50 flex flex-col items-center gap-3 active:scale-95 transition-all">
-            <div className="bg-ocean-blue/10 p-4 rounded-2xl text-ocean-blue">
-              <Anchor size={28} />
-            </div>
-            <span className="text-sm font-black text-gray-800">Check Prices</span>
-          </Link>
-          <Link href="/buyers" className="bg-white p-5 rounded-3xl shadow-lg border border-gray-50 flex flex-col items-center gap-3 active:scale-95 transition-all">
-            <div className="bg-sunrise-orange/10 p-4 rounded-2xl text-sunrise-orange">
-              <Filter size={28} />
-            </div>
-            <span className="text-sm font-black text-gray-800">Find Buyers</span>
-          </Link>
-        </section>
+          {/* Quick Actions */}
+          <section className="grid grid-cols-2 gap-4 h-full content-end">
+            <Link href="/prices" className="bg-white p-5 rounded-3xl shadow-lg border border-gray-50 flex flex-col items-center justify-center gap-3 active:scale-95 transition-all h-full min-h-[140px]">
+              <div className="bg-ocean-blue/10 p-4 rounded-2xl text-ocean-blue">
+                <Anchor size={28} />
+              </div>
+              <span className="text-sm font-black text-gray-800">Check Prices</span>
+            </Link>
+            <Link href="/buyers" className="bg-white p-5 rounded-3xl shadow-lg border border-gray-50 flex flex-col items-center justify-center gap-3 active:scale-95 transition-all h-full min-h-[140px]">
+              <div className="bg-sunrise-orange/10 p-4 rounded-2xl text-sunrise-orange">
+                <Filter size={28} />
+              </div>
+              <span className="text-sm font-black text-gray-800">Find Buyers</span>
+            </Link>
+          </section>
+        </div>
       </main>
     </div>
   );
