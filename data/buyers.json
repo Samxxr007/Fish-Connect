@@ -1,0 +1,102 @@
+[
+  {
+    "id": "b1",
+    "name": "Ocean Exports Ltd",
+    "type": "Exporter",
+    "location": "Chennai",
+    "species_wanted": ["Tuna", "Lobster", "Squid"],
+    "price_offer": "Market + 5%",
+    "min_quantity_kg": 100,
+    "contact": "+91-9876543210"
+  },
+  {
+    "id": "b2",
+    "name": "Taj Coromandel",
+    "type": "Hotel",
+    "location": "Chennai",
+    "species_wanted": ["Pomfret", "Kingfish", "Snapper"],
+    "price_offer": "Premium (Fixed)",
+    "min_quantity_kg": 20,
+    "contact": "+91-9876543211"
+  },
+  {
+    "id": "b3",
+    "name": "Kerala Seafoods",
+    "type": "Supermarket",
+    "location": "Kochi",
+    "species_wanted": ["Sardine", "Mackerel", "Prawns"],
+    "price_offer": "Market Avg",
+    "min_quantity_kg": 50,
+    "contact": "+91-9876543212"
+  },
+  {
+    "id": "b4",
+    "name": "Malabar Dine",
+    "type": "Restaurant",
+    "location": "Kochi",
+    "species_wanted": ["Crab", "Pomfret"],
+    "price_offer": "Negotiable",
+    "min_quantity_kg": 10,
+    "contact": "+91-9876543213"
+  },
+  {
+    "id": "b5",
+    "name": "Mangalore Fish Net",
+    "type": "Exporter",
+    "location": "Mangalore",
+    "species_wanted": ["Squid", "Kingfish", "Tuna"],
+    "price_offer": "Market + 2%",
+    "min_quantity_kg": 200,
+    "contact": "+91-9876543214"
+  },
+  {
+    "id": "b6",
+    "name": "Coastal Grills",
+    "type": "Restaurant",
+    "location": "Mangalore",
+    "species_wanted": ["Mackerel", "Sardine"],
+    "price_offer": "Fixed Rate",
+    "min_quantity_kg": 15,
+    "contact": "+91-9876543215"
+  },
+  {
+    "id": "b7",
+    "name": "Vizag Trading Co.",
+    "type": "Exporter",
+    "location": "Visakhapatnam",
+    "species_wanted": ["Prawns", "Crab", "Lobster"],
+    "price_offer": "Market + 8%",
+    "min_quantity_kg": 150,
+    "contact": "+91-9876543216"
+  },
+  {
+    "id": "b8",
+    "name": "Baywatch Buffet",
+    "type": "Hotel",
+    "location": "Visakhapatnam",
+    "species_wanted": ["Snapper", "Pomfret"],
+    "price_offer": "Market Avg",
+    "min_quantity_kg": 25,
+    "contact": "+91-9876543217"
+  },
+  {
+    "id": "b9",
+    "name": "Mumbai Fresh Catch",
+    "type": "Supermarket",
+    "location": "Mumbai",
+    "species_wanted": ["Tuna", "Mackerel", "Sardine"],
+    "price_offer": "Market Avg",
+    "min_quantity_kg": 300,
+    "contact": "+91-9876543218"
+  },
+  {
+    "id": "b10",
+    "name": "Gateway Exporters",
+    "type": "Exporter",
+    "location": "Mumbai",
+    "species_wanted": ["Lobster", "Pomfret", "Kingfish"],
+    "price_offer": "High Premium",
+    "min_quantity_kg": 50,
+    "contact": "+91-9876543219"
+  }
+]

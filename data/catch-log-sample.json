@@ -1,0 +1,47 @@
+[
+  {
+    "id": "c1",
+    "date": "2024-05-10",
+    "species": "Tuna",
+    "quantity_kg": 45,
+    "port": "Chennai",
+    "price_per_kg": 340,
+    "sold_to": "Ocean Exports Ltd"
+  },
+  {
+    "id": "c2",
+    "date": "2024-05-11",
+    "species": "Prawns",
+    "quantity_kg": 20,
+    "port": "Chennai",
+    "price_per_kg": 460,
+    "sold_to": "Local Market"
+  },
+  {
+    "id": "c3",
+    "date": "2024-05-12",
+    "species": "Mackerel",
+    "quantity_kg": 100,
+    "port": "Kochi",
+    "price_per_kg": 170,
+    "sold_to": "Kerala Seafoods"
+  },
+  {
+    "id": "c4",
+    "date": "2024-05-13",
+    "species": "Sardine",
+    "quantity_kg": 200,
+    "port": "Kochi",
+    "price_per_kg": 110,
+    "sold_to": "Middleman"
+  },
+  {
+    "id": "c5",
+    "date": "2024-05-14",
+    "species": "Pomfret",
+    "quantity_kg": 15,
+    "port": "Mangalore",
+    "price_per_kg": 610,
+    "sold_to": "Coastal Grills"
+  }
+]
