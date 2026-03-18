@@ -50,7 +50,7 @@ export default function CatchPage() {
         </div>
       </header>
 
-      <main className="px-6 -mt-8 space-y-6">
+      <main className="px-6 -mt-8 space-y-6 relative z-10">
         {/* Stats Summary */}
         <div className="grid grid-cols-2 gap-4">
           <div className="bg-white p-5 rounded-3xl shadow-xl border border-gray-50">
