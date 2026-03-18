@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import prices from '@/data/fish-prices.json';
+import { FishPrice } from '@/types';
 
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
@@ -7,7 +8,9 @@ export async function GET(request: Request) {
 
   let filteredPrices = prices;
   if (port && port !== 'All') {
-    filteredPrices = prices.filter((p: any) => p.port.toLowerCase() === port.toLowerCase());
+  if (port && port !== 'All') {
+    filteredPrices = (prices as FishPrice[]).filter((p: FishPrice) => p.port.toLowerCase() === port.toLowerCase());
+  }
   }
 
   return NextResponse.json(filteredPrices);

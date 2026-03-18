@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { PlusCircle, Calendar, Anchor, IndianRupee, User, Info } from "lucide-react";
+import { PlusCircle, Calendar, Anchor, IndianRupee, User } from "lucide-react";
 
 const speciesList = ["Tuna", "Prawns", "Mackerel", "Sardine", "Pomfret", "Crab", "Squid", "Kingfish", "Lobster", "Snapper"];
 const ports = ["Chennai", "Kochi", "Mangalore", "Visakhapatnam", "Mumbai"];
@@ -160,6 +160,6 @@ export default function CatchForm({ onSave }: { onSave: () => void }) {
   );
 }
 
-function cn(...inputs: any[]) {
+function cn(...inputs: (string | boolean | undefined)[]) {
   return inputs.filter(Boolean).join(" ");
 }

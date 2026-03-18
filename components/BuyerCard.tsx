@@ -1,14 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Phone, MapPin, Package, User, CheckCircle2 } from "lucide-react";
-import { clsx, type ClassValue } from "clsx";
-import { twMerge } from "tailwind-merge";
-
-function cn(...inputs: ClassValue[]) {
-  return twMerge(clsx(inputs));
-}
-
+import { Phone, MapPin, Package, CheckCircle2 } from "lucide-react";
 interface BuyerCardProps {
   id: string;
   name: string;

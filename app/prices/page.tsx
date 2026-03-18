@@ -1,22 +1,19 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import FishPriceCard from "@/components/FishPriceCard";
 import HistoricalTrends from "@/components/HistoricalTrends";
-import { Search, Filter, MapPin, RefreshCw } from "lucide-react";
+import { Filter, MapPin, RefreshCw } from "lucide-react";
+import { FishPrice } from "@/types";
 
 const ports = ["All", "Chennai", "Kochi", "Mangalore", "Visakhapatnam", "Mumbai"];
 
 export default function PricesPage() {
-  const [prices, setPrices] = useState([]);
+  const [prices, setPrices] = useState<FishPrice[]>([]);
   const [port, setPort] = useState("All");
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    fetchPrices();
-  }, [port]);
-
-  const fetchPrices = async () => {
+  const fetchPrices = useCallback(async () => {
     setLoading(true);
     try {
       const res = await fetch(`/api/prices?port=${port}`);
@@ -26,7 +23,11 @@ export default function PricesPage() {
       console.error("Failed to fetch prices:", error);
     }
     setLoading(false);
-  };
+  }, [port]);
+
+  useEffect(() => {
+    fetchPrices();
+  }, [fetchPrices]);
 
   return (
     <div className="min-h-screen bg-soft-white pb-24">
@@ -78,7 +79,7 @@ export default function PricesPage() {
             </div>
             
             <div className="grid grid-cols-1 gap-4">
-              {prices.map((item: any) => (
+              {prices.map((item) => (
                 <FishPriceCard key={item.id} {...item} />
               ))}
             </div>

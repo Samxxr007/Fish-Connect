@@ -1,23 +1,20 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import BuyerCard from "@/components/BuyerCard";
-import { Search, Filter, Fish, MapPin, Building2, RefreshCw } from "lucide-react";
+import { Search, Fish, MapPin, Building2, RefreshCw } from "lucide-react";
+import { Buyer } from "@/types";
 
 const species = ["All", "Tuna", "Prawns", "Mackerel", "Sardine", "Pomfret", "Crab", "Squid", "Kingfish", "Lobster", "Snapper"];
 const types = ["All", "Exporter", "Hotel", "Supermarket", "Restaurant"];
 const locations = ["All", "Chennai", "Kochi", "Mangalore", "Visakhapatnam", "Mumbai"];
 
 export default function BuyersPage() {
-  const [buyers, setBuyers] = useState([]);
+  const [buyers, setBuyers] = useState<Buyer[]>([]);
   const [filters, setFilters] = useState({ species: "All", type: "All", location: "All" });
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    fetchBuyers();
-  }, [filters]);
-
-  const fetchBuyers = async () => {
+  const fetchBuyers = useCallback(async () => {
     setLoading(true);
     try {
       const query = new URLSearchParams(filters).toString();
@@ -28,7 +25,11 @@ export default function BuyersPage() {
       console.error("Failed to fetch buyers:", error);
     }
     setLoading(false);
-  };
+  }, [filters]);
+
+  useEffect(() => {
+    fetchBuyers();
+  }, [fetchBuyers]);
 
   return (
     <div className="min-h-screen bg-soft-white pb-24">
@@ -91,7 +92,7 @@ export default function BuyersPage() {
             </div>
             
             <div className="grid grid-cols-1 gap-6">
-              {buyers.map((buyer: any) => (
+              {buyers.map((buyer) => (
                 <BuyerCard key={buyer.id} {...buyer} />
               ))}
             </div>

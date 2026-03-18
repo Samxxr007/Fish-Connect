@@ -2,10 +2,11 @@
 
 import { useState, useEffect } from "react";
 import CatchForm from "@/components/CatchForm";
-import { ScrollText, TrendingUp, Wallet, Package, Trash2, AlertCircle, Minus, Plus } from "lucide-react";
+import { TrendingUp, Wallet, Package, Trash2, AlertCircle, Minus } from "lucide-react";
+import { CatchLog } from "@/types";
 
 export default function CatchPage() {
-  const [logs, setLogs] = useState([]);
+  const [logs, setLogs] = useState<CatchLog[]>([]);
   const [showForm, setShowForm] = useState(false);
 
   useEffect(() => {
@@ -18,12 +19,12 @@ export default function CatchPage() {
   };
 
   const deleteLog = (id: string) => {
-    const updated = logs.filter((log: any) => log.id !== id);
+    const updated = logs.filter((log: CatchLog) => log.id !== id);
     localStorage.setItem("catch-logs", JSON.stringify(updated));
     setLogs(updated);
   };
 
-  const stats = logs.reduce((acc: any, log: any) => {
+  const stats = logs.reduce((acc, log) => {
     acc.totalWeight += Number(log.quantity_kg);
     acc.totalRevenue += Number(log.quantity_kg) * Number(log.selling_price);
     return acc;
@@ -99,7 +100,7 @@ export default function CatchPage() {
               No catches logged yet. Start today!
             </div>
           ) : (
-            logs.map((log: any) => (
+            logs.map((log) => (
               <div key={log.id} className="bg-white p-4 rounded-2xl shadow-md border border-gray-50 flex justify-between items-center group">
                 <div className="flex items-center gap-4">
                   <div className="bg-gray-50 w-12 h-12 rounded-xl flex items-center justify-center text-2xl">

@@ -1,22 +1,19 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import DemandChart from "@/components/DemandChart";
 import SpikeAlert from "@/components/SpikeAlert";
 import SeaConditions from "@/components/SeaConditions";
-import { ArrowRight, Waves, Zap, Anchor, Filter, TrendingUp } from "lucide-react";
+import { Waves, Zap, Anchor, Filter, TrendingUp } from "lucide-react";
 import Link from "next/link";
+import { DemandForecast } from "@/types";
 
 export default function Home() {
-  const [forecast, setForecast] = useState([]);
+  const [forecast, setForecast] = useState<DemandForecast | null>(null);
   const [species, setSpecies] = useState("Prawns");
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    fetchForecast();
-  }, [species]);
-
-  const fetchForecast = async () => {
+  const fetchForecast = useCallback(async () => {
     setLoading(true);
     try {
       const res = await fetch(`/api/forecast?species=${species}`);
@@ -26,7 +23,11 @@ export default function Home() {
       console.error("Failed to fetch forecast:", error);
     }
     setLoading(false);
-  };
+  }, [species]);
+
+  useEffect(() => {
+    fetchForecast();
+  }, [fetchForecast]);
 
   const topRecommendations = [
     { name: "Prawns", icon: "🦐", demand: "+45%", port: "Chennai" },
@@ -95,7 +96,7 @@ export default function Home() {
                      <p className="text-sm font-black text-gray-800">Export High</p>
                    </div>
                 </div>
-                <DemandChart data={forecast} />
+                <DemandChart data={forecast?.forecast || []} />
               </>
             )}
           </div>

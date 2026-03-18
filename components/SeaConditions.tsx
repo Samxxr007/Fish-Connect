@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Waves, Wind, Thermometer, Navigation, AlertTriangle, CheckCircle2 } from "lucide-react";
+import { Waves, Wind, Thermometer, AlertTriangle, CheckCircle2 } from "lucide-react";
 
 interface MarineData {
   waveHeight: number;
@@ -34,7 +34,7 @@ export default function SeaConditions() {
         else if (waveHeight > 1.5 || windSpeed > 25) status = "caution";
 
         setData({ waveHeight, windSpeed, temp, status });
-      } catch (err) {
+      } catch {
         setError("Failed to fetch sea data");
       } finally {
         setLoading(false);
@@ -51,10 +51,14 @@ export default function SeaConditions() {
     }
 
     const interval = setInterval(() => {
-        if (data) {
-             // Re-fetch using same coords if possible, but keep it simple for now
+        // Refresh every hour if browser supports geolocation
+        if ("geolocation" in navigator) {
+          navigator.geolocation.getCurrentPosition(
+            (pos) => fetchData(pos.coords.latitude, pos.coords.longitude),
+            () => fetchData(13.08, 80.27)
+          );
         }
-    }, 3600000); // Hourly
+    }, 3600000); 
 
     return () => clearInterval(interval);
   }, []);
@@ -65,6 +69,13 @@ export default function SeaConditions() {
         <Waves className="animate-bounce" />
         <span className="font-bold">Checking Sea Conditions...</span>
       </div>
+    </div>
+  );
+
+  if (error) return (
+    <div className="bg-white rounded-3xl p-6 shadow-xl border border-red-100 flex items-center gap-3 text-red-500">
+      <AlertTriangle />
+      <span className="text-sm font-bold">{error}</span>
     </div>
   );
 
