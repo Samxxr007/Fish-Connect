@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import CatchForm from "@/components/CatchForm";
 import { TrendingUp, Wallet, Package, Trash2, AlertCircle, Minus } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 import { CatchLog } from "@/types";
 
 export default function CatchPage() {
@@ -86,11 +87,21 @@ export default function CatchPage() {
            )}
         </div>
 
-        {showForm && (
-          <div className="animate-in slide-in-from-top duration-300">
-            <CatchForm onSave={() => { loadLogs(); setShowForm(false); }} />
-          </div>
-        )}
+        <AnimatePresence>
+          {showForm && (
+            <motion.div
+              initial={{ height: 0, opacity: 0 }}
+              animate={{ height: "auto", opacity: 1 }}
+              exit={{ height: 0, opacity: 0 }}
+              transition={{ duration: 0.3 }}
+              className="overflow-hidden"
+            >
+              <div className="pb-6">
+                <CatchForm onSave={() => { loadLogs(); setShowForm(false); }} />
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
 
         {/* Log List */}
         <div className="space-y-4">
